@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "932932762845",
+    "firebase_url": "https://driversed-37036.firebaseio.com",
+    "project_id": "driversed-37036",
+    "storage_bucket": "driversed-37036.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932932762845:android:f076043af0b99ae8",
+        "android_client_info": {
+          "package_name": "stone.philosophers.com.driversed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932932762845-3rgjqleli5dlo2ndb463tks3brfj2cbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQHLoGooDhGbtKNv19I6kDpB0_PGKUG_c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
