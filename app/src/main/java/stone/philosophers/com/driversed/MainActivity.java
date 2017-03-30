@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolbar);
 
-
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -38,10 +37,36 @@ public class MainActivity extends AppCompatActivity {
             // Not logged in, launch the Log In activity
             loadLogInView();
         }
+
+        if (mFirebaseUser != null){
+            if (mFirebaseUser.getEmail().equals("student@umflint.edu")) {
+                //Load the student's main page
+                loadStudentLanding();
+            }
+            else {
+                //Load the teacher's main page.
+                loadTeacherLandingPage();
+            }
+        }
+
     }
 
     private void loadLogInView() {
         Intent intent = new Intent(this, LogInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void loadStudentLanding() {
+        Intent intent = new Intent(this, StudentLanding.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void loadTeacherLandingPage() {
+        Intent intent = new Intent(this, TeacherLanding.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -55,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
             mFirebaseAuth.signOut();
             loadLogInView();
         }
