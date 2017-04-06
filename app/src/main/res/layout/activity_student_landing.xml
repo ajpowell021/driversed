@@ -23,8 +23,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/topTextView"
         android:text="STUDENT LANDING PAGE"
         android:layout_below="@+id/main_toolbar"
         />
+
+    <Button
+            android:id="@+id/mapButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topTextView"
+            android:text="Map" />
+
 
 </RelativeLayout>
