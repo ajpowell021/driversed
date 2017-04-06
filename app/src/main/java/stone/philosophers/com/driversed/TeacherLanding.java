@@ -3,17 +3,22 @@ package stone.philosophers.com.driversed;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import java.util.ArrayList;
 
 public class TeacherLanding extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private ListView studentListView;
+    private ArrayList<String> studentArray;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -30,6 +35,10 @@ public class TeacherLanding extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        studentListView = (ListView) findViewById(R.id.studentListView);
+        // This will be filled with database data.
+
     }
 
     @Override
