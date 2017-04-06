@@ -35,5 +35,12 @@
             android:layout_below="@+id/topTextView"
             android:text="Map" />
 
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/finishDriveButton"
+        android:text="@string/end_drive"
+        android:layout_below="@+id/mapButton" />
+
 
 </RelativeLayout>

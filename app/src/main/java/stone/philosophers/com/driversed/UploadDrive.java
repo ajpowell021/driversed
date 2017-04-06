@@ -6,18 +6,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class StudentLanding extends AppCompatActivity {
+// After a drive has been completed, upload the info to the database.
+// Also uploads an image if wanted.
+
+public class UploadDrive extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
-    private Button endDriveButton;
+    private EditText milesDrivenEditText;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -25,32 +26,18 @@ public class StudentLanding extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_landing);
-
-        // Find UI Elements
-        Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        endDriveButton = (Button) findViewById(R.id.finishDriveButton);
-
-        setSupportActionBar(mainToolbar);
+        setContentView(R.layout.activity_upload_drive);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        // On click listeners
-        endDriveButton.setOnClickListener(new View.OnClickListener() {
+        // Find UI Elements
+        Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(mainToolbar);
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentLanding.this, UploadDrive.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
+        milesDrivenEditText = (EditText) findViewById(R.id.milesTextView);
     }
 
     @Override

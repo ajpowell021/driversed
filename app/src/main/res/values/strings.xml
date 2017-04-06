@@ -17,9 +17,20 @@
     <string name="action_logout">Logout</string>
     <!-- ///////////////////////////////////////// -->
 
-    <!-- String for teacher landing view. -->
-    
+    <!-- Strings for teacher landing view. -->
 
+
+    <!-- ///////////////////////////////////////// -->
+
+    <!-- Strings for student landing view -->
+    <string name="end_drive">End Drive</string>
+
+    <!-- ///////////////////////////////////////// -->
+
+    <!-- Strings for uploading a drive. -->
+    <string name="trip_information_title">Trip Information</string>
+    <string name="miles_driven_hint">-- Miles</string>
+    <string name="miles_driven_label">Miles Driven</string>
     <!-- ///////////////////////////////////////// -->
 
 </resources>
