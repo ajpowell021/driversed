@@ -30,7 +30,10 @@
     <!-- Strings for uploading a drive. -->
     <string name="trip_information_title">Trip Information</string>
     <string name="miles_driven_hint">-- Miles</string>
-    <string name="miles_driven_label">Miles Driven</string>
+    <string name="miles_driven_label">Miles Driven:</string>
+    <string name="teacher_label">Teacher:</string>
+    <string name="teacher_hint">Teacher Name</string>
+    <string name="select_picture">Choose Image to Upload</string>
     <!-- ///////////////////////////////////////// -->
 
 </resources>
