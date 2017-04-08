@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Drivers Ed</string>
+    <string name="global_cancel">Cancel</string>
 
     <!-- Strings for login and sign up page. -->
     <string name="password_hint">Password</string>
@@ -34,6 +35,9 @@
     <string name="teacher_label">Teacher:</string>
     <string name="teacher_hint">Teacher Name</string>
     <string name="select_picture">Choose Image to Upload</string>
+    <string name="upload_dialog_title">Upload from camera or gallery.</string>
+    <string name="upload_dialog_gallery_button">Gallery</string>
+    <string name="upload_dialog_camera_button">Camera</string>
     <!-- ///////////////////////////////////////// -->
 
 </resources>

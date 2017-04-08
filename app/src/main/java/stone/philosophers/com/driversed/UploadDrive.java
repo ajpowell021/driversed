@@ -1,9 +1,18 @@
 package stone.philosophers.com.driversed;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +32,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 // After a drive has been completed, upload the info to the database.
 // Also uploads an image if wanted.
@@ -31,8 +46,12 @@ public class UploadDrive extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private StorageReference mStorage;
+    private ImageView mImageView;
 
-    private static final int GALLERY_INTENT = 2;
+    private static final int REQUEST_TAKE_PHOTO = 1;
+    private static final int REQUEST_LOAD_PHOTO = 2;
+
+    private AlertDialog imageUploadDialog;
     private ProgressDialog uploadProgressDialog;
 
     private EditText milesDrivenEditText;
@@ -44,7 +63,8 @@ public class UploadDrive extends AppCompatActivity {
         return true;
     }
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_drive);
 
@@ -60,37 +80,70 @@ public class UploadDrive extends AppCompatActivity {
 
         milesDrivenEditText = (EditText) findViewById(R.id.milesTextView);
         selectImageButton = (Button) findViewById(R.id.selectImageButton);
+        mImageView = (ImageView) findViewById(R.id.uploadedImage);
+        mImageView.setImageResource(R.drawable.taters);
 
         // On click listeners
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,GALLERY_INTENT);
+                buildUploadDialog();
             }
         });
+    }
+
+    private void buildUploadDialog() {
+        new AlertDialog.Builder(UploadDrive.this)
+                .setTitle(R.string.upload_dialog_title)
+                .setPositiveButton(R.string.upload_dialog_camera_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                        }
+                    }
+                })
+                .setNeutralButton(R.string.global_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Left empty on purpose.
+                    }
+                })
+                .show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
-            uploadProgressDialog.setMessage("Uploading ... ");
-            uploadProgressDialog.show();
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
 
-            Uri uri = data.getData();
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
 
-            StorageReference filepath = mStorage.child("Photos").child(uri.getLastPathSegment());
 
-            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(UploadDrive.this, "Upload Done", Toast.LENGTH_LONG).show();
-                    uploadProgressDialog.dismiss();
-                }
-            });
+            // THIS STUFF MAY BE USEFUL FOR UPLOADING? IDK
+
+            //uploadProgressDialog.setMessage("Uploading ... ");
+            //uploadProgressDialog.show();
+
+            // Uploading
+            //StorageReference filepath = mStorage.child("Photos").child(selectedImage.getLastPathSegment());
+
+            //filepath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+               // @Override
+               // public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                 //   uploadProgressDialog.dismiss();
+                  //  Toast.makeText(UploadDrive.this, "Upload Done", Toast.LENGTH_LONG).show();
+              //  }
+           // });
+        }
+
+        if (requestCode == REQUEST_LOAD_PHOTO && resultCode == RESULT_OK) {
+
+
         }
     }
 
@@ -117,3 +170,5 @@ public class UploadDrive extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
