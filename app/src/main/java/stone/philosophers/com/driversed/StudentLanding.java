@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,6 +19,7 @@ public class StudentLanding extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
 
     private Button endDriveButton;
+    private String TAG = "StudentLanding";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,6 +52,11 @@ public class StudentLanding extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Log.d(TAG,"trying to upload to firebase");
+        //TODO remove this test code
+        FireBaseHandeler fbh = new FireBaseHandeler(mFirebaseAuth);
+        fbh.test();
 
     }
 

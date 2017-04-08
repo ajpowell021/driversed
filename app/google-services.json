@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "932932762845-tuqn8g65g8gmcusknorq7mcg6rli1kfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "stone.philosophers.com.driversed",
+            "certificate_hash": "28552f6e859ad382a43ec9b2e43139292996f304"
+          }
+        },
+        {
           "client_id": "932932762845-3rgjqleli5dlo2ndb463tks3brfj2cbg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932932762845-3rgjqleli5dlo2ndb463tks3brfj2cbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

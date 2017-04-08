@@ -5,8 +5,8 @@ public class Student {
 
     private String name;
     private String teacher;
-    private Integer hoursDriven;
-    private Integer nightHoursDriven;
+    private double hoursDriven;
+    private double nightHoursDriven;
 
     public String getName(){
         return name;
@@ -16,11 +16,11 @@ public class Student {
         return teacher;
     }
 
-    public Integer getHoursDriven(){
+    public double getHoursDriven(){
         return hoursDriven;
     }
 
-    public Integer getNightHoursDriven(){
+    public double getNightHoursDriven(){
         return nightHoursDriven;
     }
 }
