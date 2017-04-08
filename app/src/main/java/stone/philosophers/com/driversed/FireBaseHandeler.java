@@ -16,6 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FireBaseHandeler {
     private String TAG = "FireBaseHandeler";
     private FirebaseAuth fba;
+    private String studentsDBName = "students";
+    private String tripDBName = "trips";
+
 
     public FireBaseHandeler(FirebaseAuth fba){
         this.fba = fba;
@@ -27,6 +30,15 @@ public class FireBaseHandeler {
         DatabaseReference myRef = database.getReference("debug");
 
         myRef.child(System.nanoTime()+"").setValue("Hello wordl!");
+
+    }
+
+    public void addStudent(Student s){
+        Log.d(TAG,"Trying to upload student to firebase");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(studentsDBName);
+
+        myRef.child(System.nanoTime()+"").setValue(s);
 
     }
 }
