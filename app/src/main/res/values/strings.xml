@@ -19,6 +19,7 @@
     <!-- ///////////////////////////////////////// -->
 
     <!-- Strings for teacher landing view. -->
+    <string name="student_name_list_header">Your Students</string>
 
 
     <!-- ///////////////////////////////////////// -->
