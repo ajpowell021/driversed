@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,7 +19,7 @@ public class TeacherLanding extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private ListView studentListView;
-    private ArrayList<String> studentArray;
+    private ArrayList<String> studentNameList = new ArrayList<String>();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,8 +38,7 @@ public class TeacherLanding extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         studentListView = (ListView) findViewById(R.id.studentListView);
-        // This will be filled with database data.
-
+        fillStudentListView();
     }
 
     @Override
@@ -62,5 +62,29 @@ public class TeacherLanding extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void fillStudentListView() {
+        // List view only contains student names currently.
+        // Currently hard coded.
+
+        Student studentOne = new Student("Adam Powell", "Mr. Rauh", 15, 3);
+        Student studentTwo = new Student("Derek Mason", "Mr. Rauh", 20, 10);
+        Student studentThree = new Student("Mike Pancakes", "Mr. Rauh", 10, 10);
+        Student studentFour = new Student("Sam Manning", "Mr. Rauh", 50, 0);
+        Student studentFive = new Student("Cole Airsick", "Mr. Rauh", 1, 1);
+
+        studentNameList.add(studentOne.getName());
+        studentNameList.add(studentTwo.getName());
+        studentNameList.add(studentThree.getName());
+        studentNameList.add(studentFour.getName());
+        studentNameList.add(studentFive.getName());
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                studentNameList);
+
+        studentListView.setAdapter(arrayAdapter);
     }
 }
