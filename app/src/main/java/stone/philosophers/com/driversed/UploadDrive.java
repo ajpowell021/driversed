@@ -70,7 +70,6 @@ public class UploadDrive extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        mStorage = FirebaseStorage.getInstance().getReference();
 
         uploadProgressDialog = new ProgressDialog(this);
 
