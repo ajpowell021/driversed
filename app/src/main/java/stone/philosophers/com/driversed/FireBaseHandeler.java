@@ -39,6 +39,13 @@ public class FireBaseHandeler {
         DatabaseReference myRef = database.getReference(studentsDBName);
 
         myRef.child(System.nanoTime()+"").setValue(s);
+    }
 
+    public void addTrip (Trip t){
+        Log.d(TAG,"Trying to upload student to firebase");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(studentsDBName);
+
+        myRef.child(System.nanoTime()+"").setValue(t);
     }
 }

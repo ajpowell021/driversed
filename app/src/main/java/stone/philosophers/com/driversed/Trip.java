@@ -1,6 +1,14 @@
 package stone.philosophers.com.driversed;
 
 public class Trip {
+    public Trip(String studentName, String teacherName, long startTime, long endTime, double totalMilesDriven) {
+        this.studentName = studentName;
+        this.teacherName = teacherName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.totalMilesDriven = totalMilesDriven;
+    }
+
     private String studentName;
     private String teacherName;
     private long startTime;
