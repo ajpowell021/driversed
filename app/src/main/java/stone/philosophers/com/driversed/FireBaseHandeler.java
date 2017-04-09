@@ -47,6 +47,7 @@ public class FireBaseHandeler {
         this.fba = fba;
         this.customStudentListener = null;
         startStudentListener();
+        startTripListener();
     }
 
     public void setCustomStudentListener(CustomStudentListener customStudentListener) {
@@ -137,6 +138,30 @@ public class FireBaseHandeler {
         output = studentsList;
 
         return output;
+    }
+
+    public Student[] getStudents(String teacher){
+        ArrayList<Student> outputList = new ArrayList<Student>();
+
+        for (Student s: studentsList){
+            if (s.getTeacher().equals(teacher)){
+                outputList.add(s);
+            }
+        }
+
+        return outputList.toArray(new Student[outputList.size()]);
+    }
+
+    public Trip[] getTripList(String student){
+        ArrayList<Trip> outputList = new ArrayList<Trip>();
+
+        for (Trip t: tripList){
+            if (t.getStudentName().equals(student)){
+                outputList.add(t);
+            }
+        }
+
+        return outputList.toArray(new Trip[outputList.size()]);
     }
 
     public interface CustomStudentListener {
