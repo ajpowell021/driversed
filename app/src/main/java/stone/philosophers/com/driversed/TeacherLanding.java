@@ -9,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,8 +23,7 @@ public class TeacherLanding extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private ListView studentListView;
     private ArrayList<String> studentNameList = new ArrayList<String>();
-
-    private ProgressDialog databaseLoadingProgress;
+    private Button addStudentButton;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,6 +42,17 @@ public class TeacherLanding extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         studentListView = (ListView) findViewById(R.id.studentListView);
+        addStudentButton = (Button) findViewById(R.id.addStudentButton);
+
+        addStudentButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
+
+        // This must run to populate the student list from the database.
         fillStudentListView();
     }
 
