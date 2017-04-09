@@ -53,10 +53,11 @@ public class StudentLanding extends AppCompatActivity {
             }
         });
 
-        Log.d(TAG,"trying to upload to firebase");
+
         //TODO remove this test code
+        Log.d(TAG,"trying to upload to firebase");
         FireBaseHandeler fbh = new FireBaseHandeler(mFirebaseAuth);
-        fbh.test();
+
 
     }
 

@@ -3,8 +3,17 @@ package stone.philosophers.com.driversed;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Shadow4 on 4/8/2017.
@@ -18,10 +27,24 @@ public class FireBaseHandeler {
     private FirebaseAuth fba;
     private String studentsDBName = "students";
     private String tripDBName = "trips";
+    private boolean studentIsDownloaded = false;
+    private Student[] studentsList = null;
+    private boolean tripIsDownloaded = false;
+
+    public boolean isStudentIsDownloaded() {
+        return studentIsDownloaded;
+    }
+
+    public boolean isTripIsDownloaded() {
+        return tripIsDownloaded;
+    }
+
+    private Trip[] tripList = null;
 
 
     public FireBaseHandeler(FirebaseAuth fba){
         this.fba = fba;
+        startStudentListener();
     }
 
     public void test(){
@@ -47,5 +70,63 @@ public class FireBaseHandeler {
         DatabaseReference myRef = database.getReference(studentsDBName);
 
         myRef.child(System.nanoTime()+"").setValue(t);
+    }
+
+    private void startStudentListener(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(studentsDBName);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Student> tempStudentList = new ArrayList<Student>();
+                for (DataSnapshot studentSnapshot: dataSnapshot.getChildren()){
+                    Student student = studentSnapshot.getValue(Student.class);
+                    //Log.d(TAG,student.getName());
+                    tempStudentList.add(student);
+                }
+                studentIsDownloaded = true;
+
+                studentsList = tempStudentList.toArray(new Student[tempStudentList.size()]);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void startTripListener(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(tripDBName);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Trip> tempStudentList = new ArrayList<Trip>();
+                for (DataSnapshot studentSnapshot: dataSnapshot.getChildren()){
+                    Trip trip = studentSnapshot.getValue(Trip.class);
+                    //Log.d(TAG,student.getName());
+                    tempStudentList.add(trip);
+                }
+                tripIsDownloaded = true;
+
+                studentsList = tempStudentList.toArray(new Student[tempStudentList.size()]);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public Student[] getStudents(){
+        Student output[] = null;
+
+        output = studentsList;
+
+        return output;
     }
 }
