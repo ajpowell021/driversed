@@ -30,6 +30,7 @@ public class FireBaseHandeler {
     private boolean studentIsDownloaded = false;
     private Student[] studentsList = null;
     private boolean tripIsDownloaded = false;
+    private CustomStudentListener customStudentListener;
 
     public boolean isStudentIsDownloaded() {
         return studentIsDownloaded;
@@ -42,37 +43,42 @@ public class FireBaseHandeler {
     private Trip[] tripList = null;
 
 
-    public FireBaseHandeler(FirebaseAuth fba){
+    public FireBaseHandeler(FirebaseAuth fba) {
         this.fba = fba;
+        this.customStudentListener = null;
         startStudentListener();
     }
 
-    public void test(){
-        Log.d(TAG,"Trying to upload to firebase");
+    public void setCustomStudentListener(CustomStudentListener customStudentListener) {
+        this.customStudentListener = customStudentListener;
+    }
+
+    public void test() {
+        Log.d(TAG, "Trying to upload to firebase");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("debug");
 
-        myRef.child(System.nanoTime()+"").setValue("Hello wordl!");
+        myRef.child(System.nanoTime() + "").setValue("Hello wordl!");
 
     }
 
-    public void addStudent(Student s){
-        Log.d(TAG,"Trying to upload student to firebase");
+    public void addStudent(Student s) {
+        Log.d(TAG, "Trying to upload student to firebase");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(studentsDBName);
 
-        myRef.child(System.nanoTime()+"").setValue(s);
+        myRef.child(System.nanoTime() + "").setValue(s);
     }
 
-    public void addTrip (Trip t){
-        Log.d(TAG,"Trying to upload student to firebase");
+    public void addTrip(Trip t) {
+        Log.d(TAG, "Trying to upload student to firebase");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(studentsDBName);
 
-        myRef.child(System.nanoTime()+"").setValue(t);
+        myRef.child(System.nanoTime() + "").setValue(t);
     }
 
-    private void startStudentListener(){
+    private void startStudentListener() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(studentsDBName);
 
@@ -80,14 +86,17 @@ public class FireBaseHandeler {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Student> tempStudentList = new ArrayList<Student>();
-                for (DataSnapshot studentSnapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot studentSnapshot : dataSnapshot.getChildren()) {
                     Student student = studentSnapshot.getValue(Student.class);
                     //Log.d(TAG,student.getName());
                     tempStudentList.add(student);
                 }
                 studentIsDownloaded = true;
-
                 studentsList = tempStudentList.toArray(new Student[tempStudentList.size()]);
+
+                if (customStudentListener != null) {
+                    customStudentListener.onStudentsLoaded(studentsList);
+                }
             }
 
             @Override
@@ -97,7 +106,7 @@ public class FireBaseHandeler {
         });
     }
 
-    private void startTripListener(){
+    private void startTripListener() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(tripDBName);
 
@@ -105,7 +114,7 @@ public class FireBaseHandeler {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Trip> tempStudentList = new ArrayList<Trip>();
-                for (DataSnapshot studentSnapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot studentSnapshot : dataSnapshot.getChildren()) {
                     Trip trip = studentSnapshot.getValue(Trip.class);
                     //Log.d(TAG,student.getName());
                     tempStudentList.add(trip);
@@ -122,11 +131,15 @@ public class FireBaseHandeler {
         });
     }
 
-    public Student[] getStudents(){
+    public Student[] getStudents() {
         Student output[] = null;
 
         output = studentsList;
 
         return output;
+    }
+
+    public interface CustomStudentListener {
+        public void onStudentsLoaded(Student[] students);
     }
 }

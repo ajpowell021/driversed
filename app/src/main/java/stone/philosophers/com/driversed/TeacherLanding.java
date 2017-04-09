@@ -1,5 +1,6 @@
 package stone.philosophers.com.driversed;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class TeacherLanding extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private ListView studentListView;
     private ArrayList<String> studentNameList = new ArrayList<String>();
+
+    private ProgressDialog databaseLoadingProgress;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,26 +68,22 @@ public class TeacherLanding extends AppCompatActivity {
     }
 
     private void fillStudentListView() {
-        // List view only contains student names currently.
-        // Currently hard coded.
 
-        Student studentOne = new Student("Adam Powell", "Mr. Rauh", 15, 3);
-        Student studentTwo = new Student("Derek Mason", "Mr. Rauh", 20, 10);
-        Student studentThree = new Student("Mike Pancakes", "Mr. Rauh", 10, 10);
-        Student studentFour = new Student("Sam Manning", "Mr. Rauh", 50, 0);
-        Student studentFive = new Student("Cole Airsick", "Mr. Rauh", 1, 1);
+        final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
+        db.setCustomStudentListener(new FireBaseHandeler.CustomStudentListener() {
+            @Override
+            public void onStudentsLoaded(Student[] students) {
+                Student[] studentArray =  db.getStudents();
 
-        studentNameList.add(studentOne.getName());
-        studentNameList.add(studentTwo.getName());
-        studentNameList.add(studentThree.getName());
-        studentNameList.add(studentFour.getName());
-        studentNameList.add(studentFive.getName());
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                studentNameList);
-
-        studentListView.setAdapter(arrayAdapter);
+                for(int i = 0; i < studentArray.length; i++) {
+                    studentNameList.add(i, studentArray[i].getName());
+                }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        TeacherLanding.this,
+                        android.R.layout.simple_list_item_1,
+                        studentNameList);
+                studentListView.setAdapter(arrayAdapter);
+            }
+        });
     }
 }
