@@ -40,6 +40,7 @@ public class UploadDrive extends AppCompatActivity {
 
     private EditText milesDrivenEditText;
     private Button selectImageButton;
+    private Button uploadTripButton;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,6 +65,7 @@ public class UploadDrive extends AppCompatActivity {
         selectImageButton = (Button) findViewById(R.id.selectImageButton);
         mImageView = (ImageView) findViewById(R.id.uploadedImage);
         mImageView.setImageResource(R.drawable.taters);
+        uploadTripButton = (Button) findViewById(R.id.uploadTripButton);
 
         // On click listeners
         selectImageButton.setOnClickListener(new View.OnClickListener() {
@@ -72,11 +74,19 @@ public class UploadDrive extends AppCompatActivity {
                 buildUploadDialog();
             }
         });
+
+        uploadTripButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // THIS IS WHERE THE DATA WILL BE SENT TO DB.
+            }
+        });
     }
 
     private void buildUploadDialog() {
         new AlertDialog.Builder(UploadDrive.this)
                 .setTitle(R.string.upload_dialog_title)
+                .setMessage(R.string.upload_dialog_message)
                 .setPositiveButton(R.string.upload_dialog_camera_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -86,7 +96,7 @@ public class UploadDrive extends AppCompatActivity {
                         }
                     }
                 })
-                .setNeutralButton(R.string.global_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.global_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Left empty on purpose.

@@ -163,14 +163,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selectImageButton"
-                    android:layout_marginTop="48dp"
-                    android:layout_marginBottom="48dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
                     android:adjustViewBounds="true"
                     android:maxHeight="200dp"
                     android:maxWidth="500dp"
                     android:minHeight="200dp"
                     android:minWidth="500dp"
                     android:layout_centerHorizontal="true"/>
+
+                <Button
+                    android:id="@+id/uploadTripButton"
+                    android:text="@string/start_upload_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/uploadedImage"/>
 
             </RelativeLayout>
 

@@ -40,10 +40,12 @@
     <string name="start_time_hint">00:00</string>
     <string name="end_time_label">End Time:</string>
     <string name="end_time_hint">00:00</string>
-    <string name="select_picture">Choose Image to Upload</string>
-    <string name="upload_dialog_title">Upload from camera or gallery.</string>
+    <string name="select_picture">Take Picture</string>
+    <string name="upload_dialog_title">Upload</string>
+    <string name="upload_dialog_message">Open Camera</string>
     <string name="upload_dialog_gallery_button">Gallery</string>
     <string name="upload_dialog_camera_button">Camera</string>
+    <string name="start_upload_button">Upload</string>
     <!-- ///////////////////////////////////////// -->
 
 </resources>
