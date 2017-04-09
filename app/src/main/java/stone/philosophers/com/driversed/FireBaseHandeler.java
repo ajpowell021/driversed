@@ -30,6 +30,15 @@ public class FireBaseHandeler {
     private boolean studentIsDownloaded = false;
     private Student[] studentsList = null;
     private boolean tripIsDownloaded = false;
+
+    public boolean isStudentIsDownloaded() {
+        return studentIsDownloaded;
+    }
+
+    public boolean isTripIsDownloaded() {
+        return tripIsDownloaded;
+    }
+
     private Trip[] tripList = null;
 
 

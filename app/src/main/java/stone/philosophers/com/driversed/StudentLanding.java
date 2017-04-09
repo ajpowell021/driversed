@@ -57,7 +57,7 @@ public class StudentLanding extends AppCompatActivity {
         //TODO remove this test code
         Log.d(TAG,"trying to upload to firebase");
         FireBaseHandeler fbh = new FireBaseHandeler(mFirebaseAuth);
-        
+
 
     }
 
