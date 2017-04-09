@@ -20,21 +20,42 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView
-        android:id="@+id/teacherLandingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEACHER LANDING PAGE"
-        android:layout_below="@+id/main_toolbar"
-        />
-
-
-    <ListView
-        android:id="@+id/studentListView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/teacherLandingText"
-        android:layout_marginTop="12dp" />
+        android:orientation="vertical"
+        android:gravity="bottom"
+        >
 
+        <android.support.v7.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/teacherLandingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/student_name_list_header"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="24dp"
+                    />
+
+                <ListView
+                    android:id="@+id/studentListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="12dp"
+                    />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
 </RelativeLayout>
