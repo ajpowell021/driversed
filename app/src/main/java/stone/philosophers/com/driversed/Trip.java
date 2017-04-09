@@ -1,9 +1,5 @@
 package stone.philosophers.com.driversed;
 
-/**
- * Created by Shadow4 on 4/8/2017.
- */
-
 public class Trip {
     private String studentName;
     private String teacherName;
@@ -50,6 +46,4 @@ public class Trip {
     public void setTotalMilesDriven(double totalMilesDriven) {
         this.totalMilesDriven = totalMilesDriven;
     }
-
-
 }
