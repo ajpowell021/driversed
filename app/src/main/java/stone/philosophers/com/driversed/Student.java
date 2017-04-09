@@ -8,6 +8,8 @@ public class Student {
     private double hoursDriven;
     private double nightHoursDriven;
 
+    public Student(){}
+
     public Student(String studentName, String studentTeacher, double studentHours, double studentNightHours) {
         name = studentName;
         teacher = studentTeacher;
