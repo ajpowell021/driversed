@@ -88,24 +88,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(tripButton.getText().toString() == "End Trip"){
-                    Intent intent = new Intent(MapsActivity.this, UploadDrive.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
                 if(!locating) {
                     locating = true;
                     tripButton.setText("End Trip");
+                    mStartTime = System.currentTimeMillis();
                     LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, MapsActivity.this);
                 } else {
                     locating = false;
                     tripButton.setText(("Start Trip"));
                     LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, MapsActivity.this);
                     distanceText.setText("Miles: " + Float.toString(distanceCalc()));
-                    mEndTime = mLastLocation.getTime();
+                    mEndTime = System.currentTimeMillis();
                     mMap.addMarker(new MarkerOptions().position(new LatLng(mCapturedLocations.get(mCapturedLocations.size()-1).latitude, mCapturedLocations.get(mCapturedLocations.size()-1).longitude)).title("End Point"));
                     mCapturedLocations.clear();
+
+                    //Here tripbutton text = End trip, moved your stuff here
+                    Intent intent = new Intent(MapsActivity.this, UploadDrive.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
             }
         });
@@ -307,8 +308,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng prevLoc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         mLastLocation = location;
 
-        if(mCapturedLocations.size()==0)
-            mStartTime = location.getTime();
         mCapturedLocations.add(new LatLng(location.getLatitude(), location.getLongitude()));
         LatLng loc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
