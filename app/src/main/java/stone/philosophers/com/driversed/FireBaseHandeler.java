@@ -146,6 +146,17 @@ public class FireBaseHandeler {
         return output;
     }
 
+    public Student getStudentFromEmail(String email) {
+        Student output = null;
+
+        for (Student s: studentsList){
+            if (s.getEmailAddress().equals(email)) {
+                output = s;
+            }
+        }
+        return output;
+    }
+
     public Student[] getStudents(String teacher){
         ArrayList<Student> outputList = new ArrayList<Student>();
 

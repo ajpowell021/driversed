@@ -59,6 +59,18 @@ public class UploadDrive extends AppCompatActivity {
 
         uploadProgressDialog = new ProgressDialog(this);
 
+        final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
+        db.setCustomStudentListener(new FireBaseHandeler.CustomStudentListener() {
+                                        @Override
+                                        public void onStudentsLoaded(Student[] students) {
+                                            EditText studentNameEditText = (EditText) findViewById(R.id.studentEditText);
+                                            EditText teacherNameEditText = (EditText) findViewById(R.id.teacherEditText);
+                                            Student loggedInStudent = db.getStudentFromEmail(mFirebaseUser.getEmail());
+                                            studentNameEditText.setText(loggedInStudent.getName());
+                                            teacherNameEditText.setText(loggedInStudent.getTeacher());
+                                        }
+                                    });
+
         // Find UI Elements
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolbar);
