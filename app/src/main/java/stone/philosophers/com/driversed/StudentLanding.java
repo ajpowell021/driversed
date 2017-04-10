@@ -1,5 +1,7 @@
 package stone.philosophers.com.driversed;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +16,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -29,6 +34,7 @@ public class StudentLanding extends AppCompatActivity {
     private Button endDriveButton;
     private String TAG = "StudentLanding";
     private ListView tripListView;
+    private Context context = this;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,15 +70,8 @@ public class StudentLanding extends AppCompatActivity {
 
         tripListView = (ListView) findViewById(R.id.tripListView);
 
-
-        //TODO remove this test code
-        Log.d(TAG,"trying to upload to firebase");
-        FireBaseHandeler fbh = new FireBaseHandeler(mFirebaseAuth);
-
         // This gets the trips from firebase.
         fillTripArrayForStudent();
-
-
     }
 
     @Override
@@ -132,9 +131,16 @@ public class StudentLanding extends AppCompatActivity {
                 tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        AlertDialog tripDialog = new AlertDialog.Builder(StudentLanding.this).create();
-                        tripDialog.setTitle(R.string.trip_information_title);
-                        tripDialog.setMessage(tripArray[i].getStudentName());
+                        final Dialog tripDialog = new Dialog(context);
+                        tripDialog.setContentView(R.layout.view_trip_dialog_view);
+                        TextView studentNameTextView = (TextView) tripDialog.findViewById(R.id.student_name_text);
+                        TextView teacherNameTextView = (TextView) tripDialog.findViewById(R.id.teacher_name_text);
+                        TextView timeTextView = (TextView) tripDialog.findViewById(R.id.start_end_time);
+                        TextView milesTextView = (TextView) tripDialog.findViewById(R.id.miles_driven_text);
+                        studentNameTextView.setText(tripArray[i].getStudentName());
+                        teacherNameTextView.setText(tripArray[i].getTeacherName());
+                        timeTextView.setText(convertTime(tripArray[i].getStartTime()) + getString(R.string.time_to) + convertTime(tripArray[i].getEndTime()));
+                        milesTextView.setText(tripArray[i].getTotalMilesDriven() + " " + getString(R.string.miles_driven_hint));
                         tripDialog.show();
                     }
                 });
