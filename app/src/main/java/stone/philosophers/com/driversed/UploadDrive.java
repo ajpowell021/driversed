@@ -42,6 +42,8 @@ public class UploadDrive extends AppCompatActivity {
     private Button selectImageButton;
     private Button uploadTripButton;
     private Button cancelButton;
+    private double milesDrivenFromMap;
+    private MapsActivity mapsActivity;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,6 +56,8 @@ public class UploadDrive extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_drive);
 
+        milesDrivenFromMap = mapsActivity.milesFromMap;
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -65,9 +69,13 @@ public class UploadDrive extends AppCompatActivity {
                                         public void onStudentsLoaded(Student[] students) {
                                             EditText studentNameEditText = (EditText) findViewById(R.id.studentEditText);
                                             EditText teacherNameEditText = (EditText) findViewById(R.id.teacherEditText);
+                                            EditText milesDrivenEditText = (EditText) findViewById(R.id.mileEditText);
                                             Student loggedInStudent = db.getStudentFromEmail(mFirebaseUser.getEmail());
                                             studentNameEditText.setText(loggedInStudent.getName());
                                             teacherNameEditText.setText(loggedInStudent.getTeacher());
+                                            String formattedMilesFromMap = Double.toString(milesDrivenFromMap);
+                                            milesDrivenEditText.setText(formattedMilesFromMap + " Miles");
+
                                         }
                                     });
 
@@ -120,7 +128,7 @@ public class UploadDrive extends AppCompatActivity {
                     Toast.makeText(UploadDrive.this, getString(R.string.add_trip_error), Toast.LENGTH_LONG).show();
                 }
                 else {
-                    double milesDriven = Double.parseDouble(milesDrivenString);
+                    double milesDriven = milesDrivenFromMap;
                     long startTime = Long.parseLong(startTimeString);
                     long endTime = Long.parseLong(endTimeString);
 
