@@ -56,7 +56,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="16dp"
-                        android:background="@mipmap/ic_launcher"
+                        android:background="@mipmap/ic_person_add_black_24dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="24dp"
                         />

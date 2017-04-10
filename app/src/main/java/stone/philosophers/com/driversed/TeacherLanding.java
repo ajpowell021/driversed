@@ -1,7 +1,13 @@
 package stone.philosophers.com.driversed;
 
+import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.View.OnClickListener;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
@@ -12,10 +18,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
+
+import static stone.philosophers.com.driversed.R.mipmap.ic_launcher;
+import static stone.philosophers.com.driversed.R.mipmap.ic_person_add_black_24dp;
 
 public class TeacherLanding extends AppCompatActivity {
 
@@ -24,6 +36,7 @@ public class TeacherLanding extends AppCompatActivity {
     private ListView studentListView;
     private ArrayList<String> studentNameList = new ArrayList<String>();
     private Button addStudentButton;
+    final Context context = this;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,7 +60,7 @@ public class TeacherLanding extends AppCompatActivity {
         addStudentButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                
+                buildAddStudentAlertDialog();
             }
         });
 
@@ -86,6 +99,7 @@ public class TeacherLanding extends AppCompatActivity {
             @Override
             public void onStudentsLoaded(Student[] students) {
                 Student[] studentArray =  db.getStudents();
+                studentNameList = new ArrayList<String>();
 
                 for(int i = 0; i < studentArray.length; i++) {
                     studentNameList.add(i, studentArray[i].getName());
@@ -97,5 +111,50 @@ public class TeacherLanding extends AppCompatActivity {
                 studentListView.setAdapter(arrayAdapter);
             }
         });
+    }
+
+    private void buildAddStudentAlertDialog() {
+        final Dialog addStudentAlertDialog = new Dialog(context);
+        addStudentAlertDialog.setContentView(R.layout.add_student_dialog_view);
+        addStudentAlertDialog.setCancelable(true);
+        Button positiveButton = (Button) addStudentAlertDialog.findViewById(R.id.dialog_save_button);
+        positiveButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        EditText studentName = ((EditText) addStudentAlertDialog.findViewById(R.id.enterStudentName));
+                        EditText teacherName = (EditText) addStudentAlertDialog.findViewById(R.id.enterTeacherName);
+                        EditText dayHoursDriven = (EditText) addStudentAlertDialog.findViewById(R.id.enterHoursDriven);
+                        EditText nightHoursDriven = (EditText) addStudentAlertDialog.findViewById(R.id.enterNightHoursDriven);
+
+                        if(studentName.getText().toString().isEmpty() || teacherName.getText().toString().isEmpty() ) {
+
+                            addStudentAlertDialog.dismiss();
+                            Toast.makeText(context, getString(R.string.add_student_error_message), Toast.LENGTH_LONG).show();
+                        }
+                        else{
+
+                            String name = studentName.getText().toString();
+                            String teacher = teacherName.getText().toString();
+                            double dayHoursDouble = Double.parseDouble(dayHoursDriven.getText().toString());
+                            double nightHoursDouble = Double.parseDouble(nightHoursDriven.getText().toString());
+
+                            final Student studentToAdd = new Student(name, teacher, dayHoursDouble, nightHoursDouble);
+
+                            final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
+                            db.addStudent(studentToAdd);
+                            addStudentAlertDialog.dismiss();
+                        }
+                    }
+                });
+
+        Button cancelButton = (Button) addStudentAlertDialog.findViewById(R.id.dialog_cancel_button);
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addStudentAlertDialog.dismiss();
+            }
+        });
+        addStudentAlertDialog.show();
     }
 }
