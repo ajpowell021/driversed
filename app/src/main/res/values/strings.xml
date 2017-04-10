@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Drivers Ed</string>
+    <string name="global_cancel">Cancel</string>
+    <string name="global_save">Save</string>
 
     <!-- Strings for login and sign up page. -->
     <string name="password_hint">Password</string>
@@ -17,6 +19,46 @@
     <string name="action_logout">Logout</string>
     <string name="title_activity_maps">Map</string>
     <string name="google_maps_web_services_key">AIzaSyAsPe22ihNF2CDwPFZwxfzbD-YxugHZc4w</string>
+    <!-- ///////////////////////////////////////// -->
+
+    <!-- Strings for teacher landing view. -->
+    <string name="student_name_list_header">Your Students</string>
+    <string name="add_student_button">Add New Student</string>
+    <string name="add_student_dialog_message">Enter Student Information:</string>
+    <string name="add_student_name_hint">Student Name</string>
+    <string name="add_teacher_name_hint">Teacher Name</string>
+    <string name="add_day_hours_hint">Current Daylight Hours</string>
+    <string name="add_night_hours_hint">Current Night Hours</string>
+    <string name="add_student_error_message">Please enter valid information.</string>
+    <string name="add_student_email_hint">Email Address</string>
+
+    <!-- ///////////////////////////////////////// -->
+
+    <!-- Strings for student landing view -->
+    <string name="end_drive">End Drive</string>
+    <string name="time_to">\u0020to\u0020</string>
+    <string name="add_trip_error">Please enter all the information.</string>
+
+    <!-- ///////////////////////////////////////// -->
+
+    <!-- Strings for uploading a drive. -->
+    <string name="trip_information_title">Trip Information</string>
+    <string name="miles_driven_hint">Miles Driven</string>
+    <string name="miles_driven_label">Miles Driven:</string>
+    <string name="teacher_label">Teacher:</string>
+    <string name="teacher_hint">Teacher Name</string>
+    <string name="student_name_label">Student Name: </string>
+    <string name ="student_hint">Student\'s Name</string>
+    <string name="start_time_label">Start Time:</string>
+    <string name="start_time_hint">Start Time (ex: 1300)</string>
+    <string name="end_time_label">End Time:</string>
+    <string name="end_time_hint">End Time (ex: 1400)</string>
+    <string name="select_picture">Take Picture (Optional) </string>
+    <string name="upload_dialog_title">Upload</string>
+    <string name="upload_dialog_message">Open Camera</string>
+    <string name="upload_dialog_gallery_button">Gallery</string>
+    <string name="upload_dialog_camera_button">Camera</string>
+    <string name="start_upload_button">Upload</string>
     <!-- ///////////////////////////////////////// -->
 
 </resources>

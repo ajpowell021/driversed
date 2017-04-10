@@ -1,22 +1,43 @@
 package stone.philosophers.com.driversed;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class StudentLanding extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     protected Button mapButton;
+
+    private Button endDriveButton;
+    private String TAG = "StudentLanding";
+    private ListView tripListView;
+    private Context context = this;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,14 +49,20 @@ public class StudentLanding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_landing);
+
+        // Find UI Elements
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        endDriveButton = (Button) findViewById(R.id.finishDriveButton);
+
         setSupportActionBar(mainToolbar);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         mapButton = (Button) findViewById(R.id.mapButton);
-
+      
+      
+      // On click listeners
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +70,22 @@ public class StudentLanding extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+       
+        endDriveButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentLanding.this, UploadDrive.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+
+        tripListView = (ListView) findViewById(R.id.tripListView);
+
+        // This gets the trips from firebase.
+        fillTripArrayForStudent();
     }
 
     @Override
@@ -66,5 +109,78 @@ public class StudentLanding extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void fillTripArrayForStudent() {
+        final String studentEmail = mFirebaseUser.getEmail();
+
+        final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
+
+        db.setCustomTripListener(new FireBaseHandeler.CustomTripListener() {
+            @Override
+            public void onTripsLoaded(Trip[] trips) {
+                final Trip[] tripArray = db.getTripList(studentEmail);
+
+                ArrayList<String> tripDisplayNameList = new ArrayList<String>();
+                long startTime;
+                long endTime;
+                double milesDriven;
+                String formattedTrip;
+
+                for(int i = 0; i < tripArray.length; i++) {
+                    startTime = tripArray[i].getStartTime();
+                    endTime = tripArray[i].getEndTime();
+                    milesDriven = tripArray[i].getTotalMilesDriven();
+                    formattedTrip = convertTime(startTime) + getString(R.string.time_to) + convertTime(endTime) + "     " + milesDriven + " miles";
+                    tripDisplayNameList.add(i, formattedTrip);
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        StudentLanding.this,
+                        android.R.layout.simple_list_item_1,
+                        tripDisplayNameList
+                );
+
+                tripListView.setAdapter(arrayAdapter);
+                tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        final Dialog tripDialog = new Dialog(context);
+                        tripDialog.setContentView(R.layout.view_trip_dialog_view);
+                        TextView studentNameTextView = (TextView) tripDialog.findViewById(R.id.student_name_text);
+                        TextView teacherNameTextView = (TextView) tripDialog.findViewById(R.id.teacher_name_text);
+                        TextView timeTextView = (TextView) tripDialog.findViewById(R.id.start_end_time);
+                        TextView milesTextView = (TextView) tripDialog.findViewById(R.id.miles_driven_text);
+                        studentNameTextView.setText(tripArray[i].getStudentName());
+                        teacherNameTextView.setText(tripArray[i].getTeacherName());
+                        timeTextView.setText(convertTime(tripArray[i].getStartTime()) + getString(R.string.time_to) + convertTime(tripArray[i].getEndTime()));
+                        milesTextView.setText(tripArray[i].getTotalMilesDriven() + " " + getString(R.string.miles_driven_hint));
+                        tripDialog.show();
+                    }
+                });
+            }
+        });
+
+    }
+
+    private String convertTime(Long time){
+
+        String amPm = "am";
+        int hours = (int)(time / 100);
+        if(hours == 0){
+            hours = 12;
+            amPm = "am";
+        }
+        if(hours > 12){
+            amPm = "pm";
+        }
+        int minutes = (int)(time - (hours * 100));
+        if(hours > 12) {
+            hours = hours - 12;
+        }
+        DecimalFormat formatter = new DecimalFormat("00");
+        String formattedMinutes = formatter.format(minutes);
+        String formattedTime = hours + ":" + formattedMinutes + amPm;
+        return formattedTime;
     }
 }
