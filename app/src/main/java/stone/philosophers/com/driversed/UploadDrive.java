@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
@@ -37,8 +39,6 @@ public class UploadDrive extends AppCompatActivity {
 
     private AlertDialog imageUploadDialog;
     private ProgressDialog uploadProgressDialog;
-
-    private EditText milesDrivenEditText;
     private Button selectImageButton;
     private Button uploadTripButton;
 
@@ -78,7 +78,38 @@ public class UploadDrive extends AppCompatActivity {
         uploadTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // THIS IS WHERE THE DATA WILL BE SENT TO DB.
+
+                EditText studentNameEditText = (EditText) findViewById(R.id.studentEditText);
+                EditText teacherNameEditText = (EditText) findViewById(R.id.teacherEditText);
+                EditText milesDrivenEditText = (EditText) findViewById(R.id.mileEditText);
+                EditText startTimeEditText = (EditText) findViewById(R.id.startTimeEditText);
+                EditText endTimeEditText = (EditText) findViewById(R.id.endTimeEditText);
+
+                String studentName = studentNameEditText.getText().toString();
+                String teacherName = teacherNameEditText.getText().toString();
+                String milesDrivenString = milesDrivenEditText.getText().toString();
+                String startTimeString = startTimeEditText.getText().toString();
+                String endTimeString = endTimeEditText.getText().toString();
+                String email =  mFirebaseUser.getEmail();
+
+                if (studentName.isEmpty() || teacherName.isEmpty() || milesDrivenString.isEmpty() || startTimeString.isEmpty() || endTimeString.isEmpty()) {
+                    Toast.makeText(UploadDrive.this, getString(R.string.add_trip_error), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    double milesDriven = Double.parseDouble(milesDrivenString);
+                    long startTime = Long.parseLong(startTimeString);
+                    long endTime = Long.parseLong(endTimeString);
+
+                    Trip tripToAdd = new Trip(studentName, teacherName, startTime, endTime, milesDriven, email);
+
+                    final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
+                    db.addTrip(tripToAdd);
+
+                    Intent intent = new Intent(UploadDrive.this, StudentLanding.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
             }
         });
     }

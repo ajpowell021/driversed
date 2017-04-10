@@ -34,21 +34,23 @@
 
     <!-- Strings for student landing view -->
     <string name="end_drive">End Drive</string>
+    <string name="time_to">\u0020to\u0020</string>
+    <string name="add_trip_error">Please enter all the information.</string>
 
     <!-- ///////////////////////////////////////// -->
 
     <!-- Strings for uploading a drive. -->
     <string name="trip_information_title">Trip Information</string>
-    <string name="miles_driven_hint">120</string>
+    <string name="miles_driven_hint">Miles Driven</string>
     <string name="miles_driven_label">Miles Driven:</string>
     <string name="teacher_label">Teacher:</string>
     <string name="teacher_hint">Teacher Name</string>
     <string name="student_name_label">Student Name: </string>
-    <string name ="student_hint">Student</string>
+    <string name ="student_hint">Student\'s Name</string>
     <string name="start_time_label">Start Time:</string>
-    <string name="start_time_hint">00:00</string>
+    <string name="start_time_hint">Start Time (ex: 1300)</string>
     <string name="end_time_label">End Time:</string>
-    <string name="end_time_hint">00:00</string>
+    <string name="end_time_hint">End Time (ex: 1400)</string>
     <string name="select_picture">Take Picture</string>
     <string name="upload_dialog_title">Upload</string>
     <string name="upload_dialog_message">Open Camera</string>

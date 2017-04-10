@@ -10,6 +10,8 @@ public class Trip {
         this.studentEmail = studentEmail;
     }
 
+    public Trip(){}
+
     private String studentName;
     private String teacherName;
     private long startTime;

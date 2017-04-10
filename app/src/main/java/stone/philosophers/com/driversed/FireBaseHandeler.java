@@ -77,7 +77,7 @@ public class FireBaseHandeler {
     public void addTrip(Trip t) {
         Log.d(TAG, "Trying to upload student to firebase");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(studentsDBName);
+        DatabaseReference myRef = database.getReference(tripDBName);
 
         myRef.child(System.nanoTime() + "").setValue(t);
     }

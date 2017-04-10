@@ -52,99 +52,54 @@
                     android:layout_centerHorizontal="true"
                     />
 
-                <TextView
-                    android:id="@+id/milesLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/miles_driven_label"
-                    android:layout_below="@+id/tripInformation"
-                    android:layout_marginTop="24dp"
-                    />
-
                 <EditText
                     android:id="@+id/mileEditText"
                     android:hint="@string/miles_driven_hint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/milesLabel"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="24dp"
                     android:singleLine="true"
-                    />
-
-                <TextView
-                    android:id="@+id/teacherLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/teacher_label"
-                    android:layout_marginTop="24dp"
-                    android:layout_below="@+id/milesLabel"
                     />
 
                 <EditText
                     android:id="@+id/teacherEditText"
                     android:hint="@string/teacher_hint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/teacherLabel"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_below="@+id/mileEditText"
                     android:singleLine="true"/>
-
-                <TextView
-                    android:id="@+id/studentLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/student_name_label"
-                    android:layout_marginTop="24dp"
-                    android:layout_below="@+id/teacherLabel"
-                    />
 
                 <EditText
                     android:id="@+id/studentEditText"
                     android:hint="@string/student_hint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/studentLabel"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_below="@+id/teacherEditText"
                     android:singleLine="true"/>
-
-                <TextView
-                    android:id="@+id/startTimeLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/start_time_label"
-                    android:layout_marginTop="24dp"
-                    android:layout_below="@+id/studentLabel"
-                    />
 
                 <EditText
                     android:id="@+id/startTimeEditText"
                     android:hint="@string/start_time_hint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/startTimeLabel"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_below="@+id/studentEditText"
                     android:singleLine="true"/>
-
-                <TextView
-                    android:id="@+id/endTimeLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/end_time_label"
-                    android:layout_marginTop="24dp"
-                    android:layout_below="@+id/startTimeLabel"
-                    />
 
                 <EditText
                     android:id="@+id/endTimeEditText"
                     android:hint="@string/end_time_hint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/endTimeLabel"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_below="@+id/startTimeEditText"
                     android:singleLine="true"/>
 
