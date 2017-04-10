@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +32,7 @@ public class StudentLanding extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    protected Button mapButton;
 
     private Button endDriveButton;
     private String TAG = "StudentLanding";
@@ -56,7 +59,18 @@ public class StudentLanding extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        // On click listeners
+        mapButton = (Button) findViewById(R.id.mapButton);
+      
+      
+      // On click listeners
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentLanding.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+       
         endDriveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

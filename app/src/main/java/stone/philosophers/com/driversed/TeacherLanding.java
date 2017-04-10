@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -45,7 +47,7 @@ public class TeacherLanding extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
+      
         studentListView = (ListView) findViewById(R.id.studentListView);
         addStudentButton = (Button) findViewById(R.id.addStudentButton);
 
@@ -59,6 +61,7 @@ public class TeacherLanding extends AppCompatActivity {
 
         // This must run to populate the student list from the database.
         fillStudentListView();
+
     }
 
     @Override
