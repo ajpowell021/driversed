@@ -41,6 +41,7 @@ public class UploadDrive extends AppCompatActivity {
     private ProgressDialog uploadProgressDialog;
     private Button selectImageButton;
     private Button uploadTripButton;
+    private Button cancelButton;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,12 +67,23 @@ public class UploadDrive extends AppCompatActivity {
         mImageView = (ImageView) findViewById(R.id.uploadedImage);
         mImageView.setImageResource(R.drawable.taters);
         uploadTripButton = (Button) findViewById(R.id.uploadTripButton);
+        cancelButton = (Button) findViewById(R.id.cancelButton);
 
         // On click listeners
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buildUploadDialog();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UploadDrive.this, StudentLanding.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 

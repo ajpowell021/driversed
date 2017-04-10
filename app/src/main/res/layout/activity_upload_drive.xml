@@ -132,7 +132,18 @@
                     android:text="@string/start_upload_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/uploadedImage"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:text="@string/global_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    />
 
             </RelativeLayout>
 

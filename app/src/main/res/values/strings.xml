@@ -51,7 +51,7 @@
     <string name="start_time_hint">Start Time (ex: 1300)</string>
     <string name="end_time_label">End Time:</string>
     <string name="end_time_hint">End Time (ex: 1400)</string>
-    <string name="select_picture">Take Picture</string>
+    <string name="select_picture">Take Picture (Optional) </string>
     <string name="upload_dialog_title">Upload</string>
     <string name="upload_dialog_message">Open Camera</string>
     <string name="upload_dialog_gallery_button">Gallery</string>
