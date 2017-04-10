@@ -50,6 +50,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected Button tripButton;
     protected TextView distanceText;
     protected boolean locating;
+    protected long mStartTime;
+    protected long mEndTime;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,6 +96,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     tripButton.setText(("Start Trip"));
                     LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, MapsActivity.this);
                     distanceText.setText("Miles: " + Float.toString(distanceCalc()));
+                    mEndTime = mLastLocation.getTime();
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(mCapturedLocations.get(mCapturedLocations.size()-1).latitude, mCapturedLocations.get(mCapturedLocations.size()-1).longitude)).title("End Point"));
                     mCapturedLocations.clear();
                 }
             }
@@ -105,11 +109,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             return 0;
 
         Location from = new Location("");
-        from.setLatitude(mCapturedLocations.get(0).latitude);
-        from.setLongitude(mCapturedLocations.get(0).longitude);
         float distance = 0;
         Location to = new Location("");
         for(int i = 1; i < mCapturedLocations.size(); i++) {
+            from.setLatitude(mCapturedLocations.get(i-1).latitude);
+            from.setLongitude(mCapturedLocations.get(i-1).longitude);
             to.setLatitude(mCapturedLocations.get(i).latitude);
             to.setLongitude(mCapturedLocations.get(i).longitude);
             distance += from.distanceTo(to);
@@ -169,7 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         } else
             loc = new LatLng(0, -0);
-        //mMap.addMarker(new MarkerOptions().position(loc).title("Marker in Here"));
+        mMap.addMarker(new MarkerOptions().position(loc).title("Your Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
     }
@@ -256,7 +260,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             else
                 loc = new LatLng(0, 0);
-            //mMap.addMarker(new MarkerOptions().position(loc).title("Marker in Here"));
+            mMap.addMarker(new MarkerOptions().position(loc).title("Your Location"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
             mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         } else {
@@ -294,6 +298,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
         LatLng prevLoc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         mLastLocation = location;
+
+        if(mCapturedLocations.size()==0)
+            mStartTime = location.getTime();
         mCapturedLocations.add(new LatLng(location.getLatitude(), location.getLongitude()));
         LatLng loc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
@@ -309,8 +316,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.clear();
         mMap.addPolyline(new PolylineOptions()
                 .add(mapPoints)
-                .width(5).color(Color.BLUE).geodesic(true));
+                .width(20).color(Color.BLUE).geodesic(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-        //mMap.addMarker(new MarkerOptions().position(loc).title("Marker in Here"));
+        mMap.addMarker(new MarkerOptions().position(mapPoints[0]).title("Start Point"));
     }
 }
