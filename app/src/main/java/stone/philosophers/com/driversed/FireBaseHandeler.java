@@ -29,29 +29,32 @@ public class FireBaseHandeler {
     private String tripDBName = "trips";
     private boolean studentIsDownloaded = false;
     private Student[] studentsList = null;
+    private Trip[] tripList = null;
     private boolean tripIsDownloaded = false;
     private CustomStudentListener customStudentListener;
-
+    private CustomTripListener customTripListener;
     public boolean isStudentIsDownloaded() {
         return studentIsDownloaded;
     }
-
     public boolean isTripIsDownloaded() {
         return tripIsDownloaded;
     }
-
-    private Trip[] tripList = null;
 
 
     public FireBaseHandeler(FirebaseAuth fba) {
         this.fba = fba;
         this.customStudentListener = null;
+        this.customTripListener = null;
         startStudentListener();
         startTripListener();
     }
 
     public void setCustomStudentListener(CustomStudentListener customStudentListener) {
         this.customStudentListener = customStudentListener;
+    }
+
+    public void setCustomTripListener(CustomTripListener customTripListener) {
+        this.customTripListener = customTripListener;
     }
 
     public void test() {
@@ -121,8 +124,11 @@ public class FireBaseHandeler {
                     tempStudentList.add(trip);
                 }
                 tripIsDownloaded = true;
+                tripList = tempStudentList.toArray(new Trip[tempStudentList.size()]);
 
-                studentsList = tempStudentList.toArray(new Student[tempStudentList.size()]);
+                if (customTripListener != null) {
+                    customTripListener.onTripsLoaded(tripList);
+                }
             }
 
             @Override
@@ -152,11 +158,11 @@ public class FireBaseHandeler {
         return outputList.toArray(new Student[outputList.size()]);
     }
 
-    public Trip[] getTripList(String student){
+    public Trip[] getTripList(String email){
         ArrayList<Trip> outputList = new ArrayList<Trip>();
 
         for (Trip t: tripList){
-            if (t.getStudentName().equals(student)){
+            if (t.getStudentEmail().equals(email)){
                 outputList.add(t);
             }
         }
@@ -166,5 +172,9 @@ public class FireBaseHandeler {
 
     public interface CustomStudentListener {
         public void onStudentsLoaded(Student[] students);
+    }
+
+    public interface CustomTripListener {
+        public void onTripsLoaded(Trip[] trips);
     }
 }

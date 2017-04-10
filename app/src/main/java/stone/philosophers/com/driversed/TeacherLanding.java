@@ -118,8 +118,9 @@ public class TeacherLanding extends AppCompatActivity {
                         EditText teacherName = (EditText) addStudentAlertDialog.findViewById(R.id.enterTeacherName);
                         EditText dayHoursDriven = (EditText) addStudentAlertDialog.findViewById(R.id.enterHoursDriven);
                         EditText nightHoursDriven = (EditText) addStudentAlertDialog.findViewById(R.id.enterNightHoursDriven);
+                        EditText emailAddress = (EditText) addStudentAlertDialog.findViewById(R.id.enterEmail);
 
-                        if(studentName.getText().toString().isEmpty() || teacherName.getText().toString().isEmpty() ) {
+                        if(studentName.getText().toString().isEmpty() || teacherName.getText().toString().isEmpty() || emailAddress.getText().toString().isEmpty()) {
 
                             addStudentAlertDialog.dismiss();
                             Toast.makeText(context, getString(R.string.add_student_error_message), Toast.LENGTH_LONG).show();
@@ -130,8 +131,9 @@ public class TeacherLanding extends AppCompatActivity {
                             String teacher = teacherName.getText().toString();
                             double dayHoursDouble = Double.parseDouble(dayHoursDriven.getText().toString());
                             double nightHoursDouble = Double.parseDouble(nightHoursDriven.getText().toString());
+                            String email = emailAddress.getText().toString();
 
-                            final Student studentToAdd = new Student(name, teacher, dayHoursDouble, nightHoursDouble);
+                            final Student studentToAdd = new Student(name, teacher, dayHoursDouble, nightHoursDouble, email);
 
                             final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
                             db.addStudent(studentToAdd);

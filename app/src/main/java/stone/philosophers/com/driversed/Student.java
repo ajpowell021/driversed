@@ -7,14 +7,16 @@ public class Student {
     private String teacher;
     private double hoursDriven;
     private double nightHoursDriven;
+    private String emailAddress;
 
     public Student(){}
 
-    public Student(String studentName, String studentTeacher, double studentHours, double studentNightHours) {
+    public Student(String studentName, String studentTeacher, double studentHours, double studentNightHours, String studentEmailAddress) {
         name = studentName;
         teacher = studentTeacher;
         hoursDriven = studentHours;
         nightHoursDriven = studentNightHours;
+        emailAddress = studentEmailAddress;
     }
 
     public String getName(){
@@ -31,5 +33,9 @@ public class Student {
 
     public double getNightHoursDriven(){
         return nightHoursDriven;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
     }
 }

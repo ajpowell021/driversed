@@ -20,27 +20,21 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <TextView
+    <Button
+        android:id="@+id/mapButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/topTextView"
-        android:text="STUDENT LANDING PAGE"
-        android:layout_below="@+id/main_toolbar"
-        />
-
-    <Button
-            android:id="@+id/mapButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/topTextView"
-            android:text="Map" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Map" />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/finishDriveButton"
         android:text="@string/end_drive"
-        android:layout_below="@+id/mapButton" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>

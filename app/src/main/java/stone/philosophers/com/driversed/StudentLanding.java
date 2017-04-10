@@ -58,6 +58,9 @@ public class StudentLanding extends AppCompatActivity {
         Log.d(TAG,"trying to upload to firebase");
         FireBaseHandeler fbh = new FireBaseHandeler(mFirebaseAuth);
 
+        // This gets the trips from firebase.
+        fillTripArrayForStudent();
+
 
     }
 
@@ -82,5 +85,20 @@ public class StudentLanding extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void fillTripArrayForStudent() {
+        final String studentEmail = mFirebaseUser.getEmail();
+
+        final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
+        db.setCustomTripListener(new FireBaseHandeler.CustomTripListener() {
+            @Override
+            public void onTripsLoaded(Trip[] trips) {
+                Trip[] tripArray = db.getTripList(studentEmail);
+
+                // Put this into a list or something.
+            }
+        });
+
     }
 }

@@ -28,7 +28,7 @@
     <string name="add_day_hours_hint">Current Daylight Hours</string>
     <string name="add_night_hours_hint">Current Night Hours</string>
     <string name="add_student_error_message">Please enter valid information.</string>
-
+    <string name="add_student_email_hint">Email Address</string>
 
     <!-- ///////////////////////////////////////// -->
 

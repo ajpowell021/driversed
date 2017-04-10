@@ -1,12 +1,13 @@
 package stone.philosophers.com.driversed;
 
 public class Trip {
-    public Trip(String studentName, String teacherName, long startTime, long endTime, double totalMilesDriven) {
+    public Trip(String studentName, String teacherName, long startTime, long endTime, double totalMilesDriven, String studentEmail) {
         this.studentName = studentName;
         this.teacherName = teacherName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.totalMilesDriven = totalMilesDriven;
+        this.studentEmail = studentEmail;
     }
 
     private String studentName;
@@ -14,6 +15,7 @@ public class Trip {
     private long startTime;
     private long endTime;
     private double totalMilesDriven;
+    private String studentEmail;
 
     public String getStudentName() {
         return studentName;
@@ -53,5 +55,13 @@ public class Trip {
 
     public void setTotalMilesDriven(double totalMilesDriven) {
         this.totalMilesDriven = totalMilesDriven;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
     }
 }
