@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:padding="24dp"
+    android:background="?attr/selectableItemBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:text="@string/add_student_button"
+        style="@style/RtlOverlay.DialogWindowTitle.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/enterStudentName"
+        android:hint="@string/add_student_name_hint"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:singleLine="true"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/enterTeacherName"
+        android:hint="@string/add_teacher_name_hint"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_below="@+id/enterStudentName"/>
+
+    <EditText
+        android:id="@+id/enterHoursDriven"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_day_hours_hint"
+        android:layout_below="@+id/enterTeacherName"
+        android:layout_marginLeft="12dp"
+        android:singleLine="true"
+        android:inputType="number"
+        android:layout_marginRight="12dp" />
+
+    <EditText
+        android:id="@+id/enterNightHoursDriven"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_night_hours_hint"
+        android:layout_below="@+id/enterHoursDriven"
+        android:layout_marginLeft="12dp"
+        android:singleLine="true"
+        android:inputType="number"
+        android:layout_marginRight="12dp"/>
+
+    <Button
+        android:id="@+id/dialog_save_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/global_save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/dialog_cancel_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/global_cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"/>
+
+
+</RelativeLayout>

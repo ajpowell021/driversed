@@ -36,14 +36,33 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/teacherLandingText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/student_name_list_header"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="24dp"
-                    />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/teacherLandingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_name_list_header"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="24dp"
+                        />
+
+                    <Button
+                        android:id="@+id/addStudentButton"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@mipmap/ic_person_add_black_24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="24dp"
+                        />
+
+                </RelativeLayout>
+
 
                 <ListView
                     android:id="@+id/studentListView"
