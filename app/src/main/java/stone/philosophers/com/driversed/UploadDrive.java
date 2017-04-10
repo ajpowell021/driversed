@@ -43,6 +43,8 @@ public class UploadDrive extends AppCompatActivity {
     private Button uploadTripButton;
     private Button cancelButton;
     private double milesDrivenFromMap;
+    private long startTime;
+    private long endTime;
     private MapsActivity mapsActivity;
 
     @Override
@@ -57,6 +59,8 @@ public class UploadDrive extends AppCompatActivity {
         setContentView(R.layout.activity_upload_drive);
 
         milesDrivenFromMap = mapsActivity.milesFromMap;
+        startTime = mapsActivity.mStartTime;
+        endTime = mapsActivity.mEndTime;
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -75,6 +79,13 @@ public class UploadDrive extends AppCompatActivity {
                                             teacherNameEditText.setText(loggedInStudent.getTeacher());
                                             String formattedMilesFromMap = Double.toString(milesDrivenFromMap);
                                             milesDrivenEditText.setText(formattedMilesFromMap + " Miles");
+                                            EditText startEditText = (EditText) findViewById(R.id.startTimeEditText);
+                                            EditText endEditText = (EditText) findViewById(R.id.endTimeEditText);
+                                            String formattedStartTime = Long.toString(startTime);
+                                            startEditText.setText(formattedStartTime);
+                                            String formattedEndTime = Long.toString(endTime);
+                                            endEditText.setText(formattedEndTime);
+
 
                                         }
                                     });

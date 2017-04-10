@@ -34,7 +34,6 @@ public class StudentLanding extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     protected Button mapButton;
 
-    private Button endDriveButton;
     private String TAG = "StudentLanding";
     private ListView tripListView;
     private Context context = this;
@@ -52,7 +51,6 @@ public class StudentLanding extends AppCompatActivity {
 
         // Find UI Elements
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        endDriveButton = (Button) findViewById(R.id.finishDriveButton);
 
         setSupportActionBar(mainToolbar);
 
@@ -67,17 +65,6 @@ public class StudentLanding extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentLanding.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
-       
-        endDriveButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentLanding.this, UploadDrive.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });

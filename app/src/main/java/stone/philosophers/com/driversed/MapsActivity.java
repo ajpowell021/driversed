@@ -50,8 +50,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected Button tripButton;
     protected TextView distanceText;
     protected boolean locating;
-    protected long mStartTime;
-    protected long mEndTime;
+    public static long mStartTime;
+    public static long mEndTime;
     public static float milesFromMap;
 
     @Override
