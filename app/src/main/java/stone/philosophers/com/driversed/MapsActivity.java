@@ -50,8 +50,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected Button tripButton;
     protected TextView distanceText;
     protected boolean locating;
-    protected long mStartTime;
-    protected long mEndTime;
+    public static long mStartTime;
+    public static long mEndTime;
+    public static float milesFromMap;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,6 +88,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(tripButton.getText().toString() == "End Trip"){
+                    Intent intent = new Intent(MapsActivity.this, UploadDrive.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
                 if(!locating) {
                     locating = true;
                     tripButton.setText("End Trip");
@@ -119,6 +126,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             distance += from.distanceTo(to);
         }
         distance *= 0.000621371;
+        milesFromMap = distance;
         return distance;
     }
 

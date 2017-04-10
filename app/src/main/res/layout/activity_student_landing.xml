@@ -34,14 +34,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="Map" />
-
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/finishDriveButton"
-        android:text="@string/end_drive"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
-
-
+    
 </RelativeLayout>
