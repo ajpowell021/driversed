@@ -69,6 +69,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         setContentView(R.layout.activity_maps);
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar.setBackgroundColor(Color.parseColor("#03a9f4"));
         setSupportActionBar(mainToolbar);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -82,7 +83,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        distanceText = (TextView) findViewById(R.id.distanceText);
         tripButton = (Button) findViewById(R.id.tripButton);
 
         tripButton.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     locating = false;
                     tripButton.setText(("Start Trip"));
                     LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, MapsActivity.this);
-                    distanceText.setText("Miles: " + Float.toString(distanceCalc()));
                     mEndTime = System.currentTimeMillis();
                     mMap.addMarker(new MarkerOptions().position(new LatLng(mCapturedLocations.get(mCapturedLocations.size()-1).latitude, mCapturedLocations.get(mCapturedLocations.size()-1).longitude)).title("End Point"));
                     mCapturedLocations.clear();

@@ -3,6 +3,7 @@ package stone.philosophers.com.driversed;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class StudentLanding extends AppCompatActivity {
 
         // Find UI Elements
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar.setBackgroundColor(Color.parseColor("#03a9f4"));
 
         setSupportActionBar(mainToolbar);
 
@@ -151,6 +153,7 @@ public class StudentLanding extends AppCompatActivity {
 
     }
 
+    // I don't think this is used anymore.
     private String convertTime(Long time){
 
         String amPm = "am";

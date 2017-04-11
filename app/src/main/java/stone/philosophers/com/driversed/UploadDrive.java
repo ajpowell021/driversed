@@ -5,11 +5,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,10 +21,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -189,30 +197,9 @@ public class UploadDrive extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
-
-
-            // THIS STUFF MAY BE USEFUL FOR UPLOADING? IDK
-
-            //uploadProgressDialog.setMessage("Uploading ... ");
-            //uploadProgressDialog.show();
-
-            // Uploading
-            //StorageReference filepath = mStorage.child("Photos").child(selectedImage.getLastPathSegment());
-
-            //filepath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-               // @Override
-               // public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                 //   uploadProgressDialog.dismiss();
-                  //  Toast.makeText(UploadDrive.this, "Upload Done", Toast.LENGTH_LONG).show();
-              //  }
-           // });
-        }
-
-        if (requestCode == REQUEST_LOAD_PHOTO && resultCode == RESULT_OK) {
-
-
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

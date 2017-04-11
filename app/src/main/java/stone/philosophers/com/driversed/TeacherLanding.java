@@ -3,6 +3,7 @@ package stone.philosophers.com.driversed;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View.OnClickListener;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class TeacherLanding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_landing);
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar.setBackgroundColor(Color.parseColor("#03a9f4"));
         setSupportActionBar(mainToolbar);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
