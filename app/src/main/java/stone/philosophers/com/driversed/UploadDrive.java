@@ -109,14 +109,6 @@ public class UploadDrive extends AppCompatActivity {
         uploadTripButton = (Button) findViewById(R.id.uploadTripButton);
         cancelButton = (Button) findViewById(R.id.cancelButton);
 
-        // On click listeners
-        selectImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buildUploadDialog();
-            }
-        });
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,28 +156,6 @@ public class UploadDrive extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void buildUploadDialog() {
-        new AlertDialog.Builder(UploadDrive.this)
-                .setTitle(R.string.upload_dialog_title)
-                .setMessage(R.string.upload_dialog_message)
-                .setPositiveButton(R.string.upload_dialog_camera_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.global_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Left empty on purpose.
-                    }
-                })
-                .show();
     }
 
     @Override

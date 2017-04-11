@@ -104,29 +104,6 @@
                     android:singleLine="true"/>
 
                 <Button
-                    android:id="@+id/selectImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_picture"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="24dp"
-                    android:layout_below="@+id/teacherEditText"/>
-
-                <ImageView
-                    android:id="@+id/uploadedImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/selectImageButton"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:adjustViewBounds="true"
-                    android:maxHeight="200dp"
-                    android:maxWidth="500dp"
-                    android:minHeight="200dp"
-                    android:minWidth="500dp"
-                    android:layout_centerHorizontal="true"/>
-
-                <Button
                     android:id="@+id/uploadTripButton"
                     android:text="@string/start_upload_button"
                     android:layout_width="wrap_content"
