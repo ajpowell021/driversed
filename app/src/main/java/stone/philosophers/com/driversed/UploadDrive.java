@@ -44,9 +44,6 @@ public class UploadDrive extends AppCompatActivity {
     private StorageReference mStorage;
     private ImageView mImageView;
 
-    private static final int REQUEST_TAKE_PHOTO = 1;
-    private static final int REQUEST_LOAD_PHOTO = 2;
-
     private AlertDialog imageUploadDialog;
     private ProgressDialog uploadProgressDialog;
     private Button selectImageButton;
@@ -103,8 +100,6 @@ public class UploadDrive extends AppCompatActivity {
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolbar);
 
-        selectImageButton = (Button) findViewById(R.id.selectImageButton);
-        mImageView = (ImageView) findViewById(R.id.uploadedImage);
         mImageView.setImageResource(R.drawable.taters);
         uploadTripButton = (Button) findViewById(R.id.uploadTripButton);
         cancelButton = (Button) findViewById(R.id.cancelButton);
@@ -157,19 +152,6 @@ public class UploadDrive extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
-        }
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
