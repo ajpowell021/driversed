@@ -3,18 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greyBack"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity" >
+    tools:context="stone.philosophers.com.driversed.LogInActivity">
 
     <EditText
         android:id="@+id/emailField"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:paddingBottom="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/passwordField"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="@string/email_hint" >
@@ -24,20 +28,26 @@
 
     <EditText
         android:id="@+id/passwordField"
+        android:paddingBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/emailField"
-        android:layout_below="@+id/emailField"
+        android:layout_above="@+id/loginButton"
+        android:background="@color/greyBack"
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/loginButton"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/passwordField"
-        android:layout_below="@+id/passwordField"
         android:text="@string/login_button_label" />
 
     <TextView

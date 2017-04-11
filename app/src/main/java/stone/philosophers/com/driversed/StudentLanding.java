@@ -39,6 +39,8 @@ public class StudentLanding extends AppCompatActivity {
     private String TAG = "StudentLanding";
     private ListView tripListView;
     private Context context = this;
+    private TextView totalDayHours;
+    private TextView totalNightHours;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,6 +63,11 @@ public class StudentLanding extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         mapButton = (Button) findViewById(R.id.mapButton);
+        totalDayHours = (TextView) findViewById(R.id.student_day_hours);
+        totalNightHours = (TextView) findViewById(R.id.student_night_hours);
+
+
+
       
       
       // On click listeners
@@ -110,6 +117,15 @@ public class StudentLanding extends AppCompatActivity {
             @Override
             public void onTripsLoaded(Trip[] trips) {
                 final Trip[] tripArray = db.getTripList(studentEmail);
+
+                Student currentLoggedInStudent;
+                currentLoggedInStudent = db.getStudentFromEmail(studentEmail);
+
+                double dayHoursLoeggedIn = currentLoggedInStudent.getHoursDriven();
+                double nightHoursLoggedIn = currentLoggedInStudent.getNightHoursDriven();
+
+                totalDayHours.setText(dayHoursLoeggedIn + "/28 Day Hours");
+                totalNightHours.setText(nightHoursLoggedIn + "/2 Night Hours");
 
                 ArrayList<String> tripDisplayNameList = new ArrayList<String>();
                 long startTime;
