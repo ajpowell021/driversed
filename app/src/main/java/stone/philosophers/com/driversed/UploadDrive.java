@@ -42,7 +42,6 @@ public class UploadDrive extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private StorageReference mStorage;
-    private ImageView mImageView;
 
     private AlertDialog imageUploadDialog;
     private ProgressDialog uploadProgressDialog;
@@ -100,7 +99,6 @@ public class UploadDrive extends AppCompatActivity {
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolbar);
 
-        mImageView.setImageResource(R.drawable.taters);
         uploadTripButton = (Button) findViewById(R.id.uploadTripButton);
         cancelButton = (Button) findViewById(R.id.cancelButton);
 
