@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 // After a drive has been completed, upload the info to the database.
@@ -81,11 +83,10 @@ public class UploadDrive extends AppCompatActivity {
                                             milesDrivenEditText.setText(formattedMilesFromMap + " Miles");
                                             EditText startEditText = (EditText) findViewById(R.id.startTimeEditText);
                                             EditText endEditText = (EditText) findViewById(R.id.endTimeEditText);
-                                            String formattedStartTime = Long.toString(startTime);
-                                            startEditText.setText(formattedStartTime);
-                                            String formattedEndTime = Long.toString(endTime);
-                                            endEditText.setText(formattedEndTime);
-
+                                            String newStartTime = getTimeFromMilli(startTime);
+                                            startEditText.setText(newStartTime);
+                                            String newEndTime = getTimeFromMilli(endTime);
+                                            endEditText.setText(newEndTime);
 
                                         }
                                     });
@@ -140,10 +141,10 @@ public class UploadDrive extends AppCompatActivity {
                 }
                 else {
                     double milesDriven = milesDrivenFromMap;
-                    long startTime = Long.parseLong(startTimeString);
-                    long endTime = Long.parseLong(endTimeString);
+                    long startDriveTime = startTime;
+                    long endDriveTime = endTime;
 
-                    Trip tripToAdd = new Trip(studentName, teacherName, startTime, endTime, milesDriven, email);
+                    Trip tripToAdd = new Trip(studentName, teacherName, startDriveTime, endDriveTime, milesDriven, email);
 
                     final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
                     db.addTrip(tripToAdd);
@@ -234,6 +235,14 @@ public class UploadDrive extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public String getTimeFromMilli(Long milliseconds){
+        String formattedTime;
+
+        formattedTime = DateFormat.getTimeInstance().format(milliseconds);
+
+        return formattedTime;
     }
 }
 

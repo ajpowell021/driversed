@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -118,7 +119,7 @@ public class StudentLanding extends AppCompatActivity {
                     startTime = tripArray[i].getStartTime();
                     endTime = tripArray[i].getEndTime();
                     milesDriven = tripArray[i].getTotalMilesDriven();
-                    formattedTrip = convertTime(startTime) + getString(R.string.time_to) + convertTime(endTime) + "     " + milesDriven + " miles";
+                    formattedTrip = getTimeFromMilli(startTime) + getString(R.string.time_to) + getTimeFromMilli(endTime) + "     " + String.format("%.2f", milesDriven) + " miles";
                     tripDisplayNameList.add(i, formattedTrip);
                 }
 
@@ -140,8 +141,8 @@ public class StudentLanding extends AppCompatActivity {
                         TextView milesTextView = (TextView) tripDialog.findViewById(R.id.miles_driven_text);
                         studentNameTextView.setText(tripArray[i].getStudentName());
                         teacherNameTextView.setText(tripArray[i].getTeacherName());
-                        timeTextView.setText(convertTime(tripArray[i].getStartTime()) + getString(R.string.time_to) + convertTime(tripArray[i].getEndTime()));
-                        milesTextView.setText(tripArray[i].getTotalMilesDriven() + " " + getString(R.string.miles_driven_hint));
+                        timeTextView.setText(getTimeFromMilli(tripArray[i].getStartTime()) + getString(R.string.time_to) + getTimeFromMilli(tripArray[i].getEndTime()));
+                        milesTextView.setText(String.format("%.2f" ,tripArray[i].getTotalMilesDriven()) + " " + getString(R.string.miles_driven_hint));
                         tripDialog.show();
                     }
                 });
@@ -168,6 +169,14 @@ public class StudentLanding extends AppCompatActivity {
         DecimalFormat formatter = new DecimalFormat("00");
         String formattedMinutes = formatter.format(minutes);
         String formattedTime = hours + ":" + formattedMinutes + amPm;
+        return formattedTime;
+    }
+
+    public String getTimeFromMilli(Long milliseconds){
+        String formattedTime;
+
+        formattedTime = DateFormat.getTimeInstance().format(milliseconds);
+
         return formattedTime;
     }
 }
