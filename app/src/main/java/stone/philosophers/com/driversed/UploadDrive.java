@@ -142,6 +142,16 @@ public class UploadDrive extends AppCompatActivity {
                     final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
                     db.addTrip(tripToAdd);
 
+                    db.setCustomStudentListener(new FireBaseHandeler.CustomStudentListener() {
+                        @Override
+                        public void onStudentsLoaded(Student[] students) {
+                            long totalTime = endTime - startTime;
+                            final double hours   = (int) ((totalTime / (1000*60*60)) % 24) + 7;
+                            Student student = db.getStudentFromEmail(mFirebaseUser.getEmail());
+                            student.setHoursDriven(hours);
+                        }
+                    });
+
                     Intent intent = new Intent(UploadDrive.this, StudentLanding.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

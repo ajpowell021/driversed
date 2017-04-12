@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,6 +108,13 @@ public class TeacherLanding extends AppCompatActivity {
                         android.R.layout.simple_list_item_1,
                         studentNameList);
                 studentListView.setAdapter(arrayAdapter);
+                studentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(TeacherLanding.this, TeacherStudentView.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }

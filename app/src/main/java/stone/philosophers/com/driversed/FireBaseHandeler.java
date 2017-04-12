@@ -1,6 +1,7 @@
 package stone.philosophers.com.driversed;
 
 import android.util.Log;
+import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

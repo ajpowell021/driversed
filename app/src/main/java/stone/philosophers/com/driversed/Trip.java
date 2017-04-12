@@ -23,10 +23,6 @@ public class Trip {
         return studentName;
     }
 
-    public long getTotalTime(){
-        return endTime-startTime;
-    }
-
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }

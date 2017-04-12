@@ -1,6 +1,7 @@
 package stone.philosophers.com.driversed;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -61,6 +62,9 @@ public class LogInActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
+                    ProgressDialog progressDialog = new ProgressDialog(LogInActivity.this);
+                    progressDialog.setMessage("Logging in...");
+                    progressDialog.show();
                     mFirebaseAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LogInActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override

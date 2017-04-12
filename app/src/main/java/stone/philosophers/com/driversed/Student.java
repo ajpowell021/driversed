@@ -38,4 +38,8 @@ public class Student {
     public String getEmailAddress() {
         return emailAddress;
     }
+
+    public void setHoursDriven(double hours) {
+        hoursDriven = hoursDriven + hours;
+    }
 }

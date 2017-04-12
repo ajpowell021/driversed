@@ -30,11 +30,11 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class StudentLanding extends AppCompatActivity {
+public class TeacherStudentView extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    protected Button mapButton;
+    //protected Button mapButton;
 
     private String TAG = "StudentLanding";
     private ListView tripListView;
@@ -63,18 +63,9 @@ public class StudentLanding extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        mapButton = (Button) findViewById(R.id.mapButton);
+        //mapButton = (Button) findViewById(R.id.mapButton);
         totalDayHours = (TextView) findViewById(R.id.student_day_hours);
         totalNightHours = (TextView) findViewById(R.id.student_night_hours);
-
-      // On click listeners
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentLanding.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         tripListView = (ListView) findViewById(R.id.tripListView);
 
@@ -106,7 +97,7 @@ public class StudentLanding extends AppCompatActivity {
     }
 
     private void fillTripArrayForStudent() {
-        final String studentEmail = mFirebaseUser.getEmail();
+        final String studentEmail = "student@umflint.edu";
 
         final FireBaseHandeler db = new FireBaseHandeler(mFirebaseAuth);
 
@@ -150,7 +141,7 @@ public class StudentLanding extends AppCompatActivity {
                 }
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                        StudentLanding.this,
+                        TeacherStudentView.this,
                         android.R.layout.simple_list_item_1,
                         tripDisplayNameList
                 );

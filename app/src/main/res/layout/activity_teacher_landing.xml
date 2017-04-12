@@ -25,12 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="bottom"
+        android:gravity="top"
+        android:layout_below="@+id/main_toolbar"
         >
-
-        <android.support.v7.widget.CardView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,13 +65,11 @@
                 <ListView
                     android:id="@+id/studentListView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="12dp"
                     />
 
             </LinearLayout>
-
-        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
